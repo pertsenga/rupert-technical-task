@@ -1,66 +1,43 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Requirements
+In order to setup this project into your local machine. The following should be set up in your local environment:
+- [Composer](https://getcomposer.org/download/)
+- [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/)
+- [Webhook.site CLI](https://docs.webhook.site/cli.html#nodejs)
 
-## About Laravel
+## Setup
+Once the the requirements are installed, you should run `composer install` in the repository's directory to install dependencies for **Laravel**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Then, go to the directory of the repo and run `composer run post-root-package-install` to setup the env file for your local setup.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Next, run composer run `post-create-project-cmd` to run the final setup for Laravel.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+After setting up the backend, run `yarn install` to install dependencies for the frontend
 
-## Learning Laravel
+Finally, you can now run `composer run dev` to access the app at http://127.0.0.1:8000/ from your browser
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Running Tests
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+To run tests using Pest, run `php artisan test` in your console
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Webhook Calls
+We can simulate webhook calls using `webhooks.site`
 
-## Laravel Sponsors
+The id for this specific repo is: https://webhook.site/#!/view/bc10ed7b-e68f-4811-9108-8abe20de9e28
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Run the following to direct POST requests from out Webhook.site instance to your local development setup (Make sure local is running in http://127.0.0.1:8000/):
+```
+whcli forward --token=bc10ed7b-e68f-4811-9108-8abe20de9e28 --target=http://localhost:8000/callback
+```
 
-### Premium Partners
+Then to send a test POST request to our webhook route, run this **CURL** command in your console:
+```
+curl -X POST 'https://webhook.site/bc10ed7b-e68f-4811-9108-8abe20de9e28?secret_key=secret' \
+        -H 'content-type: application/json' \
+        -d $'{ "status": "success", "order_id": 12345 }'
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Checking Logs
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+You can check logs under `storage/logs/laravel.log` file

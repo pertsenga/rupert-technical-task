@@ -1,0 +1,28 @@
+Technical Task
+Task:
+Integrate an external API into a Laravel project using GuzzleHttp and handle callbacks from this API.
+
+Working with External API:
+Using GuzzleHttp, make a GET request to https://jsonplaceholder.typicode.com/posts to retrieve a list of posts.
+Make a POST request to https://jsonplaceholder.typicode.com/posts to create a new post with the fields title, body, userId.
+Handling Callbacks:
+Use the service Webhook.site to receive fake callbacks.
+
+Implement a POST request handler on https://yourapp.com/callback to log the received data.
+
+Example callback data: { "status": "success", "order_id": 12345 }
+
+
+Logging and Security:
+Log incoming and outgoing requests to the external API using Log::info().
+Implement a check to ensure that the callback comes from a trusted source (e.g., check the IP address or token in the header).
+
+Testing:
+Write tests to verify the functionality of working with the external API and handling callbacks.
+
+Expected Results:
+Implement working with GuzzleHttp for API requests.
+Handle incoming callbacks and log the data.
+Write tests to verify the functionality.
+
+

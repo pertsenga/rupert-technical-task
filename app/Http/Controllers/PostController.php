@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StorePostRequest;
 use GuzzleHttp\Client as GuzzleClient;
+use Redirect;
 
 class PostController extends Controller
 {
@@ -30,14 +31,25 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $client = new GuzzleClient();
+        $client->post($this::JSON_PLACEHOLDER_POSTS_URL, [
+            'form_params' => [
+                'userId' => $data['userId'],
+                'title' => $data['title'],
+                'body' => $data['body']
+            ]
+        ]);
+
+        return Redirect::route('posts.index')->with('flash', 'Post created successfully');
     }
 }

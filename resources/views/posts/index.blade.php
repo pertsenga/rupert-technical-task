@@ -2,6 +2,12 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow rounded">
+                @if (session()->has('flash'))
+                    <div class="capitalize mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+                        {{ session('flash') }}
+                    </div>
+                @endif
+
                 @foreach ($posts as $post)
                     <a href="#" class="block p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 

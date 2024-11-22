@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // Expect that webhook calls won't contain csrf tokens
+        $middleware->validateCsrfTokens(except: [
+            'webhook/*',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

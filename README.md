@@ -9,9 +9,9 @@ In order to setup this project into your local machine. The following should be 
 ## Setup
 Once the the requirements are installed, you should run `composer install` in the repository's directory to install dependencies for **Laravel**
 
-Then, go to the directory of the repo and run `composer run post-root-package-install` to setup the env file for your local setup.
+Then, run `composer run post-root-package-install` to setup the env file for your local setup.
 
-Next, run composer run `post-create-project-cmd` to run the final setup for Laravel.
+Next, run `composer run post-create-project-cmd` to run the final setup for Laravel.
 
 After setting up the backend, run `yarn install` to install dependencies for the frontend
 

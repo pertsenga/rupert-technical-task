@@ -7,4 +7,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts', [PostController::class, 'index']);
+Route::resource('posts', PostController::class, [
+    'only' => ['index', 'create', 'store']
+]);

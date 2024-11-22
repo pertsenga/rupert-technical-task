@@ -21,6 +21,8 @@ class PostController extends Controller
         $response = $client->get($this::JSON_PLACEHOLDER_POSTS_URL);
         $posts = json_decode($response->getBody(), true);
 
+        \Log::info('Posts fetched from JSONPlaceholder', $posts);
+
         return view('posts.index', [
             'posts' => $posts
         ]);
@@ -49,6 +51,8 @@ class PostController extends Controller
                 'body' => $data['body']
             ]
         ]);
+
+        \Log::info('Data of Post request to JSONPlaceholder', $data);
 
         return Redirect::route('posts.index')->with('flash', 'Post created successfully');
     }
